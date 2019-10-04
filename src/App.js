@@ -1,16 +1,15 @@
 import React from 'react';
 import logo from './logo.svg';
 import Button from 'antd/es/button';
+import { Link } from 'react-router-dom'
 import './App.css';
-
-import Home from './Home';
 
 import { Layout, Menu, Breadcrumb, Icon } from 'antd';
 
 const { SubMenu } = Menu;
 const { Header, Content, Footer, Sider } = Layout;
 
-function App() {
+function App(props) {
   return (
     <Layout>
     <Header className="header">
@@ -21,9 +20,9 @@ function App() {
         defaultSelectedKeys={['2']}
         style={{ lineHeight: '64px' }}
       >
-        <Menu.Item key="1">nav 1</Menu.Item>
-        <Menu.Item key="2">nav 2</Menu.Item>
-        <Menu.Item key="3">nav 3</Menu.Item>
+        <Menu.Item key="1"><Link to="/">Home</Link></Menu.Item>
+        <Menu.Item key="2"><Link to="/contact">Contact</Link></Menu.Item>
+        <Menu.Item key="3"><Link to="/any">Home</Link></Menu.Item>
       </Menu>
     </Header>
     <Content style={{ padding: '0 50px' }}>
@@ -85,7 +84,7 @@ function App() {
           </Menu>
         </Sider>
         <Content style={{ padding: '0 24px', minHeight: 280 }}>
-            <Home/>
+            {props.children}
         </Content>
       </Layout>
     </Content>
