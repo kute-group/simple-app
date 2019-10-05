@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Button, List, Spin} from 'antd';
 import { Link } from 'react-router-dom'
 
-import { getPosts } from '../redux/actions/post';
+import { getPost } from '../redux/actions/post';
 
 const mapStateToProps = state => {
   console.log(state);
@@ -12,7 +12,7 @@ const mapStateToProps = state => {
   };
 };
 
-function Home (props){
+function PostDetail (props){
   const [message, setMessage] = React.useState('Hello home page');
   const [count, setCount] = React.useState(0);
   const [todos, setTodo] = React.useState([]);
@@ -27,32 +27,18 @@ function Home (props){
   }
 
   React.useEffect(() => {
-    document.title = 'Home Page';
-    if(props.post.items.length <= 0){
-      props.dispatch(getPosts());
-    }
+    document.title = 'Detail page';
+    console.log(props);
+    props.dispatch(getPost(props.match.params.id));
 
   }, []);
 
   if(props.post.loading) return <Spin />
 
   return (<div>
-    <h1>{message}</h1>
-    <Button onClick={handleClick}>Click to change</Button>
-    <h2>{count}</h2>
-    <Button onClick={handleCount}>Add 1 more</Button>
-    <List
-      header={<div>Header</div>}
-      footer={<div>Footer</div>}
-      bordered
-      dataSource={props.post.items}
-      renderItem={item => (
-        <List.Item>
-          In-Progress] <Link to={"/post/" + item.id +"/" +item.slug}>{item.title.rendered}</Link>
-        </List.Item>
-      )}
-    />
+    <h1>{props.post.item.title ? props.post.item.title.rendered : ''}</h1>
+    <div dangerouslySetInnerHTML={{ __html: props.post.item.content ? props.post.item.content.rendered : '' }} />
   </div>);
 }
 
-export default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps)(PostDetail);

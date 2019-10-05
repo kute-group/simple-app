@@ -1,6 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
-import Button from 'antd/es/button';
 import { Link } from 'react-router-dom'
 import './App.css';
 
