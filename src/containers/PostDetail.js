@@ -1,34 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { Button, List, Spin} from 'antd';
-import { Link } from 'react-router-dom'
+import { Spin} from 'antd';
 
 import { getPost } from '../redux/actions/post';
 
 const mapStateToProps = state => {
-  console.log(state);
   return {
     post: state.post
   };
 };
 
 function PostDetail (props){
-  const [message, setMessage] = React.useState('Hello home page');
-  const [count, setCount] = React.useState(0);
-  const [todos, setTodo] = React.useState([]);
-  const [loading, setLoading] = React.useState(false);
-
-  const handleClick = () => {
-    setMessage('hello new world');
-  }
-
-  const handleCount = () => {
-    setCount(count+1);
-  }
-
   React.useEffect(() => {
     document.title = 'Detail page';
-    console.log(props);
     props.dispatch(getPost(props.match.params.id));
 
   }, []);
