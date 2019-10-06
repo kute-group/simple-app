@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Layout } from 'antd';
+import { Layout, BackTop } from 'antd';
 
 import AppHeader from './components/AppHeader';
 import AppFooter from './components/AppFooter';
@@ -18,6 +18,9 @@ function App(props) {
       </Layout>
     </Content>
     <AppFooter />
+    <BackTop>
+      <div className="ant-back-top-inner">UP</div>
+    </BackTop>
   </Layout>
   );
 }

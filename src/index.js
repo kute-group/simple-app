@@ -1,12 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { Route, BrowserRouter as Router } from 'react-router-dom';
+import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
 import './index.css';
+
 import App from './App';
 import Home from './containers/Home';
+import About from './containers/About';
 import Contact from './containers/Contact';
 import PostDetail from './containers/PostDetail';
+import NotFound from './containers/NotFound';
+
 import * as serviceWorker from './serviceWorker';
 import store from './redux/store';
 
@@ -14,11 +18,13 @@ const routing = (
   <Router>
     <Provider store={store}>
       <App>
-        <div>
+        <Switch>
           <Route exact path="/" component={Home} />
+          <Route path="/about" component={About} />
           <Route path="/contact" component={Contact} />
           <Route path="/post/:id/:slug" component={PostDetail} />
-        </div>
+          <Route path="*" component={NotFound} />
+        </Switch>
       </App>
     </Provider>
   </Router>

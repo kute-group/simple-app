@@ -3,6 +3,8 @@ import * as postActions from '../actions/post';
 const initialState = {
   item: {},
   items: [],
+  cate: {},
+  cates: [],
   loading: false,
   error: null
 }
@@ -38,6 +40,23 @@ export default function postReducer(state = initialState, action) {
         loading: false
       };
     case postActions.GET_POST_FAILED:
+      return {
+        ...state,
+        loading: false,
+        error: action.error
+      };
+      case postActions.GET_POST_CATES:
+      return {
+        ...state,
+        loading: true
+      };
+    case postActions.GET_POST_CATES_SUCCESS:
+      return {
+        ...state,
+        cates: action.cates,
+        loading: false
+      };
+    case postActions.GET_POST_CATES_FAILED:
       return {
         ...state,
         loading: false,

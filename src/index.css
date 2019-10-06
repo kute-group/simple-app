@@ -1,8 +1,14 @@
+@font-face {
+  font-family: 'utm_avo';
+  src: url('./assets/fonts//utmavo/Avo.ttf');
+  src: local('home'), url('./assets/fonts//utmavo/Avo.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: 'utm_avo' !important;
+  font-size: 13px !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -10,4 +16,14 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+.spiner-area{
+  text-align: center;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  padding: 30px 50px;
+  margin: 20px 0;
+  height: 150px;
+  line-height: 150px;
+  color: #1890ff;
 }

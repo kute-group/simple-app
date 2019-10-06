@@ -11,12 +11,12 @@ const mapStateToProps = state => {
   };
 };
 
-function PostDetail (props){
+function About (props){
   React.useEffect(() => {
     document.title = 'Detail page';
     const params = {
-      type: 'posts',
-      id: props.match.params.id
+      type: 'pages',
+      id: 429
     };
     props.dispatch(getPost(params));
 
@@ -44,4 +44,4 @@ function PostDetail (props){
   );
 }
 
-export default connect(mapStateToProps)(PostDetail);
+export default connect(mapStateToProps)(About);

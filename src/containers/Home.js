@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { Layout, List, Spin,  Row, Col, Icon, Avatar } from 'antd';
+import { Layout, List, Spin,  Row, Col, Icon, Avatar, Button } from 'antd';
 import { Link } from 'react-router-dom'
 
 
-import { getPosts } from '../redux/actions/post';
+import { getPosts, getPostCates } from '../redux/actions/post';
 import AppBanner from '../components/AppBanner';
 import AppSidebar from '../components/AppSidebar';
 const { Content } = Layout;
@@ -26,29 +26,36 @@ function Home (props){
 
   React.useEffect(() => {
     document.title = 'Home Page';
-    if(props.post.items.length <= 0){
-      props.dispatch(getPosts());
-    }
+    props.dispatch(getPosts());
+    props.dispatch(getPostCates());
 
   }, []);
+  console.log(props);
 
   return (
     <Content>
       <AppBanner />
+      <br/>
       <Row>
         <Col span={5}>
           <AppSidebar />
         </Col>
-        <Col span={19}>
+        <Col span={1}/>
+        <Col span={18}>
           {
-            props.post.loading ? <Spin /> : (
+            props.post.loading ? <div className="spiner-area"><Spin /> loading</div>: (
               <List
                 itemLayout="vertical"
                 size="large"
                 dataSource={props.post.items}
-                footer={
+                header={
                   <div>
-                    <b>ant design</b> footer part
+                    <h2>Bài viết mới nhất</h2>
+                  </div>
+                }
+                footer={
+                  <div style={{textAlign:"center", padding: "20px"}}>
+                    <Button type="primary" ghost> Xem thêm</Button>
                   </div>
                 }
                 renderItem={item => (
@@ -63,12 +70,12 @@ function Home (props){
                       <img
                         width={272}
                         alt="logo"
-                        src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
+                        src={item._embedded['wp:featuredmedia']['0'].source_url}
                       />
                     }
                   >
                     <List.Item.Meta
-                      avatar={<Avatar src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png" />}
+                      avatar={<Avatar src={item._embedded['wp:featuredmedia']['0'].source_url} />}
                       title={<Link to={"/post/" + item.id +"/" +item.slug}>{item.title.rendered}</Link>}
                     />
                     <div dangerouslySetInnerHTML={{ __html: item.excerpt.rendered }} />
