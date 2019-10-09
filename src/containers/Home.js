@@ -26,9 +26,8 @@ function Home (props){
 
   React.useEffect(() => {
     document.title = 'Home Page';
-    props.dispatch(getPosts());
     props.dispatch(getPostCates());
-
+    props.dispatch(getPosts());
   }, []);
   console.log(props);
 

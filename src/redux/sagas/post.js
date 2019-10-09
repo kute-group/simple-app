@@ -4,10 +4,10 @@ import * as actions from '../actions';
 import { get } from '../services/api';
 
 export function* fetchPost(payload) {
-  const endpoint = `${config.API_URL}/wp-json/wp/v2/${payload.params.type}/${payload.params.id}`;
-  const response = yield call(get, endpoint);
-  const data = yield response.data;
   try {
+    const endpoint = `${config.API_URL}/wp-json/wp/v2/${payload.params.type}/${payload.params.id}`;
+    const response = yield call(get, endpoint);
+    const data = yield response.data;
     yield put({ type: actions.post.GET_POST_SUCCESS, post: data });
   } catch (error) {
     yield put({ type: actions.post.GET_POST_FAILED, error });
@@ -15,10 +15,10 @@ export function* fetchPost(payload) {
 }
 
 export function* fetchPosts() {
-  const endpoint = config.API_URL + '/wp-json/wp/v2/posts?_embed';
-  const response = yield call(get, endpoint);
-  const data = yield response.data;
   try {
+    const endpoint = config.API_URL + '/wp-json/wp/v2/posts?_embed';
+    const response = yield call(get, endpoint);
+    const data = yield response.data;
     yield put({ type: actions.post.GET_POSTS_SUCCESS, posts: data });
   } catch (error) {
     yield put({ type: actions.post.GET_POSTS_FAILED, error });
@@ -26,10 +26,10 @@ export function* fetchPosts() {
 }
 
 export function* fetchPostCates() {
-  const endpoint = config.API_URL + '/wp-json/wp/v2/categories?_embed';
-  const response = yield call(get, endpoint);
-  const data = yield response.data;
   try {
+    const endpoint = config.API_URL + '/wp-json/wp/v2/categories?_embed';
+    const response = yield call(get, endpoint);
+    const data = yield response.data;
     yield put({ type: actions.post.GET_POST_CATES_SUCCESS, cates: data });
   } catch (error) {
     yield put({ type: actions.post.GET_POST_CATES_FAILED, error });
