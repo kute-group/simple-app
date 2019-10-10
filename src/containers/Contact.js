@@ -1,53 +1,64 @@
 import React from 'react';
-import { Button, List, Spin} from 'antd';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import { Layout, Input, Row, Col, Button, Typography, Divider } from 'antd';
 
-function Contact (){
-  const [message, setMessage] = React.useState('Hello home page');
-  const [count, setCount] = React.useState(0);
-  const [todos, setTodo] = React.useState([]);
-  const [loading, setLoading] = React.useState(false);
+import { getPost } from '../redux/actions/post';
+import AppSidebar from '../components/AppSidebar';
+const { Content } = Layout;
+const { Title, Paragraph, Text } = Typography;
 
-  const handleClick = () => {
-    setMessage('hello new world');
-  }
+const mapStateToProps = state => {
+  return {
+    post: state.post
+  };
+};
 
-  const handleCount = () => {
-    setCount(count+1);
-  }
-
+function Contact (props){
   React.useEffect(() => {
-    document.title = 'Contact Page';
-    setLoading(true);
-    const fetchTodos = async () => {
-      const todosArr = await axios('https://jsonplaceholder.typicode.com/todos');
-      setTodo(todosArr.data);
-      setLoading(false);
+    document.title = 'Detail page';
+    const params = {
+      type: 'pages',
+      id: 429
     };
-
-    fetchTodos();
+    props.dispatch(getPost(params));
 
   }, []);
 
-  if(loading) return <Spin />
+  return (
+    <Content>
+      <Row>
+        <Col span={5}>
+          <AppSidebar />
+        </Col>
+        <Col span={1}/>
+        <Col span={18}>
+          <br/>
+          <br/>
+          <Typography>
+            <Title level={3} style={{textAlign: "center"}}>LIÊN HỆ VỚI  CHÚNG TÔI</Title>
+          </Typography>
+          <Divider />
+          Họ và tên
+          <Input placeholder="Họ và tên" />
+          Họ và tên
+          <Input placeholder="Họ và tên" />
+          Họ và tên
+          <Input placeholder="Họ và tên" />
+          Họ và tên
+          <Input placeholder="Họ và tên" />
+          Họ và tên
+          <Input placeholder="Họ và tên" />
+          Họ và tên
+          <Input placeholder="Họ và tên" />
+          <br/>
+          <Button type="primary">Primary</Button>
+          <br/>
+          <br/>
+        </Col>
+      </Row>
 
-  return (<div>
-    <h1>{message}</h1>
-    <Button onClick={handleClick}>Click to contact</Button>
-    <h2>{count}</h2>
-    <Button onClick={handleCount}>Add 1 more</Button>
-    <List
-      header={<div>Header</div>}
-      footer={<div>Footer</div>}
-      bordered
-      dataSource={todos}
-      renderItem={item => (
-        <List.Item>
-          In-Progress] {item.title}
-        </List.Item>
-      )}
-    />
-  </div>);
+    </Content>
+  );
 }
 
-export default Contact;
+export default connect(mapStateToProps)(Contact);

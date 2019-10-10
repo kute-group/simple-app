@@ -1,10 +1,11 @@
 import React from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import { Layout, Spin, Row, Col } from 'antd';
 
 import { getPost } from '../redux/actions/post';
 import AppSidebar from '../components/AppSidebar';
 const { Content } = Layout;
+
 const mapStateToProps = state => {
   return {
     post: state.post

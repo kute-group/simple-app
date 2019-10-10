@@ -7,6 +7,10 @@ import './index.css';
 import App from './App';
 import Home from './containers/Home';
 import About from './containers/About';
+import Themes from './containers/Themes';
+import Courses from './containers/Courses';
+import Services from './containers/Services';
+import News from './containers/News';
 import Contact from './containers/Contact';
 import PostDetail from './containers/PostDetail';
 import NotFound from './containers/NotFound';
@@ -21,6 +25,10 @@ const routing = (
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/about" component={About} />
+          <Route path="/themes" component={Themes} />
+          <Route path="/courses" component={Courses} />
+          <Route path="/news" component={News} />
+          <Route path="/services" component={Services} />
           <Route path="/contact" component={Contact} />
           <Route path="/post/:id/:slug" component={PostDetail} />
           <Route path="*" component={NotFound} />
